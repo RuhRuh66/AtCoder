@@ -1,23 +1,26 @@
-H, N = map(int, input().split())
-magics = []
+N = int(input())
+time = [0]
+co = [[0,0]]
 for i in range(N):
-    temp = list(map(int, input().split()))
-    magics.append(temp)
-
-inf = 10 ** 10
-DP = [[inf] * (H+1) for i in range(N+1)]    
-DP[0][0] = 0
-
+    t, x, y = map(int, input().split())
+    time.append(t)
+    co.append([x, y])
+    
+flag = True
 for i in range(N):
-    for j in range(H+1):
-        if DP[i][j] == inf:
-            continue
-        
-        DP[i+1][j] = min(DP[i][j], DP[i+1][j])
-
-        if j + magics[i][0] >= H:
-            DP[i+1][H] = DP[i][j] + magics[i][1]
+    time_usable = time[i+1] - time[i]
+    dist = abs(co[i+1][0]-co[i][0]) + abs(co[i+1][1]-co[i][1])
+    if time_usable < dist:
+        flag = False
+        break   
+    else:
+        if (time_usable - dist) % 2 == 1:
+            flag = False
+            break  
         else:
-            DP[i+1][j+magics[i][1]] = min(DP[i][j]+magics[i+1][1])
+            flag = True
 
-
+if flag == True:
+    print('Yes')
+else:
+    print('No')
