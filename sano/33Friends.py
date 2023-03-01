@@ -12,4 +12,10 @@ class UnionFind():
             self.parent[x] = self.find(self.parent[x])
             return self.parent[x]
         
+    def union(self, x, y):
+        x = self.find(x)
+        y = self.find(y)
+
+        if x == y:
+            return
         
