@@ -1,21 +1,20 @@
-from collections import defaultdict
+N,M = map(int, input().split())
+mem = []
+for i in range(M):
+    temp = list(map(int, input().split()))
+    mem.append(temp)
+    
 
 class UnionFind():
     def __init__(self, n):
         self.n = n
-        self.parent = [-1] * n
+        self.parents = [-1] * n
         
     def find(self, x):
-        if self.parent[x] < 0:
+        if self.parents[x] < 0:
             return x
         else:
             self.parent[x] = self.find(self.parent[x])
             return self.parent[x]
         
-    def union(self, x, y):
-        x = self.find(x)
-        y = self.find(y)
-
-        if x == y:
-            return
         
