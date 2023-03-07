@@ -1,6 +1,3 @@
-
-
-
 def segfunc(x,y):
     return x^y
 
@@ -43,3 +40,20 @@ class SegTree:
             l//=2
             r//=2
         return result
+
+N, Q = map(int, input().split())
+A = [0] + list(map(int, input().split()))
+
+s = SegTree(A, 0, segfunc)
+
+for i in range(Q):
+    T, X, Y = map(int, input().split())
+    
+    if T == 1:
+        A_new = s.select(X) ^ Y
+        s.update(X, A_new)
+        
+    else:
+        ans = s.query(X, Y)
+        print(ans)
+    
