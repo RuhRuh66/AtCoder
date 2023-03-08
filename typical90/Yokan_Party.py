@@ -1,46 +1,36 @@
-def main():
-    import sys
-    sys.setrecursionlimit(10 ** 9)
-    input = sys.stdin.readline
-
-    N, L = map(int,input().split())
-    K = int(input())
-    A = [0] + list(map(int,input().split())) + [L]
-    
-    # ようかんをXcm以上のK+1個のピースに分けられるか確認
-    def check(l):
-        left_idx, right_idx = 0, 0
-        cnt = 0
-        while right_idx < len(A):
-            if A[right_idx] - A[left_idx] < l:
-                right_idx += 1
-            else:
-                cnt += 1
-                left_idx = right_idx
-                right_idx += 1
-                
-        return True if cnt >= K+1 else False
-
-    # Xの候補を二分探索
-    ok, ng = 1,L+1
-    while ng - ok > 1:
-        mid = (ok + ng) // 2
-        if check(mid):
-            ok = mid
-        else:
-            ng = mid
-
-    print(ok)
-
-if __name__ == '__main__':
-    main()N, L = map(int, input().split())
+N, L = map(int, input().split())
 K = int(input())
-A = list(map(int, input().split()))
+A = [0]+list(map(int, input().split())) + [L]
 
-A.append(L)
 
+
+def check(l):
+    left_index = 0
+    right_index = 0
+    cnt = 0
+    
+    while right_index < len(A):
+        if (A[right_index] - A[left_index]) < l:
+            right_index += 1
+        else:
+            cnt += 1
+            left_index = right_index
+            right_index += 1
+            
+    if cnt >= K+1:
+        return True
+    else:
+        return False
+    
 ok = -1
 ng = L
-while ng-ok>1:
+while ng-ok>1:   
     mid = (ok+ng)//2
+    if check(mid) == True:
+        ok = mid
+    else:
+        ng = mid
         
+print(ok)
+    
+    
