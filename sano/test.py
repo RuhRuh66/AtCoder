@@ -1,15 +1,9 @@
-S = int(input())
-mod = 10**9 + 7
+import re
+S = input()
 
-DP = [0] * (S+1)
+p = r'^\w+\@\w+\.\w{1,4}$'
 
-DP[1] = 0
-DP[2] = 0
-DP[3] = 1
-
-
-for i in range(4, S+1):
-    DP[i] = DP[i-1] + DP[i-3]
-
-print(DP[S]%mod)
-
+if re.search(p, S):
+    print('Yes')
+else:
+    print('No')
