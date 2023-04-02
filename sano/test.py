@@ -1,9 +1,9 @@
-import re
-S = input()
+from collections import defaultdict
 
-p = r'^\w+\@\w+\.\w{1,4}$'
+A = [k for k in range(10)]
 
-if re.search(p, S):
-    print('Yes')
-else:
-    print('No')
+s = defaultdict(int)
+for i in A:
+    s[i] += 1
+    
+print(s)
