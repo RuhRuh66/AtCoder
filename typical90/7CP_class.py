@@ -1,31 +1,35 @@
 N = int(input())
+edges = [[] for i in range(N)]
+for j in range(N-1):
+    A, B = map(int, input().split())
+    A -= 1
+    B -= 1
+    edges[A].append(B)
+    edges[B].append(A)
 
-A = list(map(int, input().split()))
-Q = int(input())
-         
-A_sorted = sorted(A)
+
+dist = [0] * N
+
+def dfs(x, last=-1):
+    global dist
+    for to in edges[x]:
+        if to == last:
+            continue
+        dist[to] = dist[x] + 1
+        dfs(to, x)
+    return dist
+        
+s = dfs(0)
+max_dist = max(s)
+max_dist_idx = dist.index(max_dist)
+
+dist[max_dist_idx] = 0
+t = dfs(max_dist_idx)
+
+print(max(t) + 1)
 
 
-for i in range(Q):
-    ok = -1
-    ng = N
-    B = int(input())
+
+
     
-    if B <= A_sorted[0]:
-        ans = A_sorted[0] - B
-        print(ans)
-        
-    elif B >= A_sorted[N-1]:
-        ans = B - A_sorted[N-1]
-        print(ans)
-        
-    else:
-        while ng-ok >1:
-            mid = (ng+ok)//2
-            if B >= A_sorted[mid]:
-                ok = mid
-            else:
-                ng = mid
-        ans = min(B-A_sorted[ok], A_sorted[ng]-B)
-        print(ans)
-        
+    
