@@ -1,31 +1,32 @@
 N = int(input())
-
 A = list(map(int, input().split()))
-Q = int(input())
-         
-A_sorted = sorted(A)
 
+A.sort()
+
+Q = int(input())
 
 for i in range(Q):
-    ok = -1
-    ng = N
-    B = int(input())
-    
-    if B <= A_sorted[0]:
-        ans = A_sorted[0] - B
-        print(ans)
-        
-    elif B >= A_sorted[N-1]:
-        ans = B - A_sorted[N-1]
-        print(ans)
-        
+    b = int(input())
+    ans = 0
+    if b <= A[0]:
+        ans = A[0]-b
+    elif b >= A[N-1]:
+        ans = b - A[N-1]
     else:
-        while ng-ok >1:
-            mid = (ng+ok)//2
-            if B >= A_sorted[mid]:
-                ok = mid
-            else:
+        ok = -1
+        ng = N
+        while ng - ok > 1:
+            mid = (ok + ng) //  2
+            if b <= A[mid]:
                 ng = mid
-        ans = min(B-A_sorted[ok], A_sorted[ng]-B)
-        print(ans)
+            else:
+                ok = mid
+        ans = min(b-A[ok], A[ng]-b) 
+    print(ans)
+            
         
+
+
+
+    
+    

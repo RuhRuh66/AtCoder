@@ -1,41 +1,46 @@
 import sys
 sys.setrecursionlimit(10**6)
 
-N  = int(input())
-desitinations = [[] for i in range(N+1)]
-for i in range(1, N):
-    A, B = map(int, input().split())
-    desitinations[A].append(B)
-    desitinations[B].append(A)
-    
-distance = [-1] * (N+1)
+N = int(input())
 
-def dfs(start, dest, dist):
-    for i in dest[start]:
-        if dist[i] == -1:
-            dist[i] = dist[start] + 1
-            dfs(i, dest, dist)
-    return dist
+edges = [[] for i in range(N)]
 
-
-if __name__ == '__main__':
-    l=dfs(1, desitinations, distance)
-    s = l.index(max(l))
-    distance2 = [-1] * (N+1)
-    distance2[s] = 0
-    m = dfs(s, desitinations, distance2)
-    print(max(m)+1)
+for i in range(N-1):
+    x, y = map(int, input().split())
+    x, y = x-1, y-1
+    edges[x].append(y)
+    edges[y].append(x)
     
 
+dist = [0] * N
 
 
-    
+def dfs(x, last=-1):
+    global dist
+    for to in edges[x]:
+        if to == last:
+            continue
+        dist[to] = dist[x] + 1
+        dfs(to, x)
+        
+dfs(0)
+max_dist = max(dist)
+farest = dist.index(max_dist)
 
+dist[farest] = 0
+dfs(farest)
+
+print(max(dist)+1)
+
+
+
+            
         
 
+    
+    
+    
 
+    
 
                 
-        
-            
-    
