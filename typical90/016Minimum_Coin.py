@@ -1,21 +1,15 @@
 N = int(input())
-
 A, B, C = map(int, input().split())
 
-ans = 10**10
-for x in range(10000):
-    if x*A > N:
-        break
-    for y in range(10000-x):
-        balance = N-A*x-B*y
-        if balance < 0:
+ans = 10000
+
+for i in range(10000):
+    for j in range(10000):
+        rest = N - A*i - B*j
+        if rest < 0:
             break
-     
-        if balance%C == 0:
-            z =balance//C
-            ans = min(z+x+y, ans)
-          
+        if rest % C == 0:
+            ans = min(ans, i + j + rest//C)
+        
+
 print(ans)
-
-
-

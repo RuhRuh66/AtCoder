@@ -2,11 +2,11 @@ N = int(input())
 A = list(map(int, input().split()))
 B = list(map(int, input().split()))
 
-a = sorted(A)
-b = sorted(B)
+A.sort()
+B.sort()
 
-ans =  0
+ans = 0
 for i in range(N):
-    ans += abs(a[i]-b[i])
+    ans += abs(A[i]-B[i])
     
 print(ans)
