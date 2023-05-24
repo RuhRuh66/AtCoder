@@ -1,10 +1,32 @@
-def is_rectangle(A:list, B:list):
-    left = max(A[0], B[0])
-    bottom = max(A[1], B[1])
-    right = min(A[2], B[2])
-    ceil = min(A[3], B[3])
-    if left < right and bottom < ceil:
-        area = (right-left) * (ceil-bottom)
-        return area
-    else:
-        return 0
+N = int(input())
+
+base = [[0] * 1001 for i in range(1001)]
+
+for i in range(N):
+    lx, ly, rx, ry = map(int, input().split())
+
+    base[lx][ly] += 1
+    base[lx][ry] -= 1
+    base[rx][ly] -= 1
+    base[rx][ry] += 1
+
+for i in range(1001):
+    for j in range(1, 1001):
+        base[i][j] += base[i][j-1]
+        
+for i in range(1, 1001):
+    for j in range(1001):
+        base[i][j] += base[i-1][j]
+
+ans = [0] * (N+1)
+
+for i in range(1001):
+    for j in range(1001):
+        cnt = base[i][j]
+        ans[cnt] += 1
+        
+print(*ans[1:], sep= '\n')
+        
+
+
+
