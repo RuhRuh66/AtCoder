@@ -26,7 +26,3 @@ for i in range(1001):
         ans[cnt] += 1
         
 print(*ans[1:], sep= '\n')
-        
-
-
-
