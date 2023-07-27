@@ -1,15 +1,14 @@
 N = int(input())
 A = list(map(int, input().split()))
 
-called = [False] * (N+1)
-called[0] = True
+called = [False] * N
 
-for i, j in enumerate(A, start=1):
-    if called[i] == True:
-        continue
-    else:
-        called[j] = True
-        
+for i in range(N):
+    if called[i] == False:
+        called[A[i]-1] = True
+
 print(called.count(False))
-a = [ i-1 for i, j in enumerate(called, start=1) if j == False]
-print(*a)
+
+for j, x in enumerate(called):
+    if x == False:
+        print(j+1, end = ' ')

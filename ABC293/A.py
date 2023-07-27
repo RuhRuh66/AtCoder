@@ -1,5 +1,12 @@
-S = list(input())
-for i in range(1, (len(S)//2)+1):
-    S[2*i - 2], S[2*i-1] = S[2*i-1], S[2*i-2]
+s = list(input())
+
+
+for i in range(1, len(s)//2 + 1):
+    s[2*i-2], s[2*i-1] = s[2*i-1], s[2*i-2]
+
+
     
-print(''.join(S))
+ans = ''
+for j in s:
+    ans+=j
+print(ans)
