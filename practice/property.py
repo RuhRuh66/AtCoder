@@ -1,48 +1,45 @@
-import sys
-sys.setrecursionlimit(10**6)
-
-H, W = map(int, input().split())
-A = [list(input()) for _ in range(H)]
-
-def get_num(x, y, W):
-    return x*W + y
-
-tree = [[] for _ in range(H*W)]
-
-move = [(0, 1), (-1, 0), (0, -1), (1, 0)]
-
-for i in range(H):
-    for j in range(W):
-        if A[i][j] == '.':
+def eratosthenes(limit: int, lowLimit:int = None):
+    if lowLimit and (lowLimit <0 or lowLimit > limit):
+        raise ValueError('incorrect lower limit')
+    isPrime = [True] * (limit+1)
+    isPrime[0] = False
+    isPrime[1] = False
+    for i in range(2, limit+1):
+        if isPrime[i] == False:
             continue
-        for dx, dy in move:
-            ni, nj = i + dx, j + dy
-            if 0<=ni<H and 0<=nj<W and A[ni][nj] == '#':
-                tree[get_num(i, j, W)].append(get_num(ni, nj, W))
+        for j in range(i*i, limit+1, i):
+            isPrime[j] = False
+            
+    if lowLimit:
+        return [i for i, x in enumerate(isPrime[lowLimit:], start=lowLimit) if x]
+    
+    else:
+        return [i for i, x in enumerate(isPrime) if x]
     
 
-visited = [False] * (H*W)
+N = int(input())
 
+est_max_prime = int(pow(N//12, 0.5))
 
-def rec(v, dv, seen):
-    seen[v] = True
-    for j in dv[v]:
-        if seen[j] == True:
-            continue
-        rec(j, dv, seen)
-    return
+prime_list = eratosthenes(est_max_prime)
+cand_prime_nmbs = len(prime_list)
 
 ans = 0
-for i in range(H):
-    for j in range(W):
-        if A[i][j] == '.':
-            continue
-        if visited[get_num(i, j, W)] == True:
-            continue
-        
-        ans += 1
-        rec(get_num(i, j, W), tree, visited)
-
-        
+for i in range(cand_prime_nmbs-2):
+    if pow(prime_list[i], 5) > N:
+        break
+    for j in range(i+1, cand_prime_nmbs-1):
+        if pow(prime_list[i], 2) * pow(prime_list[j], 3) > N:
+            break
+        for k in range(j+1, cand_prime_nmbs):
+            if pow(prime_list[i], 2) * prime_list[j] * pow(prime_list[k], 2 ) > N:
+                break
+            else:
+                ans += 1
+                
 print(ans)
+        
+        
+
+
     
