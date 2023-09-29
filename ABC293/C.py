@@ -1,37 +1,31 @@
 H, W = map(int, input().split())
-A = [[] for i in range(H)]
-for j in range(W):
-    temp = list(map(int, input().split()))
-    A[j] = temp
-    
-got_number_list  = []
-start = [0, 0]
+A = [list(map(int, input().split())) for i in range(H)]
 
+moves = [(0, 1), (1, 0)]
 
-from collections import deque
-s = deque()
-s.append(start)
-count = 0
 ans = 0
-while len(s) > 0:
-    i, j = s.popleft()
-    now_point = A[i][j]
-    if now_point not in got_number_list:
-        got_number_list.append(now_point)
-        count += 1
-        if i+1 <= H-1:
-            next_point = [i+1, j]
-            s.append(next_point)
-        if j+1 <= W-1:
-            next_point = [i, j+1]
-            s.append(next_point)
-
-    else:
-        continue
+from itertools import combinations
+for x in combinations(range(H+W-2), H-1):
+    route = [1 if i in x else 0 for i in range(H+W-2)]
     
-    if count == H+W-2:
+    nums = set()
+    nx, ny = 0, 0
+    nums.add(A[nx][ny])
+    for j in route:
+        if j == 0:
+            nx += 0
+            ny += 1
+   
+        else:
+            nx += 1
+            ny += 0
+            
+        if A[nx][ny] not in nums:
+            nums.add(A[nx][ny])
+        else:
+            continue    
+            
+    if len(nums) == (H+W-1):
         ans += 1
-print(ans)
-    
-    
 
+print(ans)
