@@ -1,9 +1,4 @@
-S = list(input())
-S = set(S)
+S = input()
+S = list(S)
 
-good = [{'N', 'S'}, {'N', 'S', 'E', 'W'}, {'E', 'W'}]
-
-if S in good:
-    print('Yes')
-else:
-    print('No')
+print('Yes' if S.count('W') == S.count('E') and S.count('S') == S.count('N') else 'No')
