@@ -18,4 +18,4 @@ def eratosthenes(limit:int, minLimit: int = None):
             
         
 
-print(eratosthenes(10**6))
+print(eratosthenes(19, 9))
