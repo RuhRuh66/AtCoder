@@ -6,4 +6,7 @@ good = [{'N', 'S'}, {'N', 'S', 'E', 'W'}, {'E', 'W'}]
 if S in good:
     print('Yes')
 else:
-    print('No')
+    print('No')S = input()
+S = list(S)
+
+print('Yes'
