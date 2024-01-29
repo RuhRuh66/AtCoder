@@ -22,3 +22,13 @@ for k in range(N):
     print(F[0][0]+1)
         
 
+for k in range(N):
+    a, b = A[k]
+    temp = 10**10
+    for l in range(M):
+        c, d = C[l]
+
+        temp = min(temp, (abs(a-c) + abs(b-d)))
+        print(temp) 
+
+
