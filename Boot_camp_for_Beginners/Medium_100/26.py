@@ -9,4 +9,14 @@ for i in range(N-1):
         B.append('E')
     else:
         B.append('GT')
+
+print(B)
         
+for j in range(N-2):
+    if B[j+1] == 'E' or B[j+1] == B[j]:
+        continue
+    else:
+        B[j+1] = 'Sep'
+
+print(B)
+print(B.count('Sep') +1)
