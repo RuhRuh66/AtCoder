@@ -25,6 +25,21 @@ for i in range(1, N):
             status = 'down'
             
     else:
+<<<<<<< HEAD
+        B.append('GT')
+
+print(B)
+        
+for j in range(N-2):
+    if B[j+1] == 'E' or B[j+1] == B[j]:
+        continue
+    else:
+        B[j+1] = 'Sep'
+
+print(B)
+print(B.count('Sep') +1)
+=======
         continue
     
 print(count)
+>>>>>>> ef1ef28138c258caa1ada7d679adb82f24a6df9f
