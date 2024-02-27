@@ -15,8 +15,9 @@ if N == 1:
     ans = abs(A[0]-X)
 
 else:
-    for i in range(N-2):
-        ans = max(ans, gcd(B[i], B[i+1]))
+    ans = B[0]
+    for i in range(1, N):
+        ans = gcd(ans, B[i])
     
 print(ans)
     
