@@ -1,0 +1,5 @@
+import sys
+_input = input
+input = lambda: sys.stdin.readline().rstrip()
+mi = lambda: map(int, input().split())
+li = lambda: list(mi())
