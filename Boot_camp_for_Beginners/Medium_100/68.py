@@ -1,10 +1,13 @@
 H, W = map(int, input().split())
-A = []
+
+root = H+W-1
+c = 0
 for i in range(H):
-    temp = list(input())
-    A.append(temp)
+    temp = input()
+    c += temp.count('#')
     
-
-h = [0, -1, 0, 1]
-w = [1, 0, -1, 0]
-
+if c == root:
+    print('Possible')
+else:
+    print('Impossible')
+    
