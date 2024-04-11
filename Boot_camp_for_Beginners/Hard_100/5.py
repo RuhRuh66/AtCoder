@@ -18,3 +18,4 @@ while tickets:
     
 print(sum(A_minus)*(-1))
 
+
