@@ -1,4 +1,7 @@
 N = int(input())
+A = list(map(int, input().split()))
+
+N = int(input())
 A = [0] + list(map(int, input().split()))
 
 count = 0
