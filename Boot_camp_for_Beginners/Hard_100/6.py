@@ -13,6 +13,7 @@ memo =[]
 for i in range(s-t+1):
     flag = False
     for j in range(t):
+        
         if S[i+j] != T[j] and S[i+j] != '?':
             flag = True
             break
