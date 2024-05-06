@@ -33,7 +33,7 @@ while que:
         if 0<= n_y <R and 0<= n_x <C and M[n_y][n_x] == '.':
             if visited[n_y][n_x] == False:
                 visited[n_y][n_x] = True
-                costs[n_y][n_x] += costs[y][x]
+                costs[n_y][n_x] = costs[y][x] + 1
                 que.append((n_y, n_x))
 
 print(costs[gy][gx])
