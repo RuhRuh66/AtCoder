@@ -23,4 +23,5 @@ else:
             else:
                 dp[j][k] = min(dp[j-1][k]+1, dp[j][k-1]+1, dp[j][k])
             
-    print(dp[l][l])
+    print(dp[l][l]
+          )
