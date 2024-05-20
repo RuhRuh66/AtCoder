@@ -1,27 +1,29 @@
 S = input()
-l = len(S)
-A = S.replace('x', '')
-B = ''.join(reversed(A))
+N = len(S)
 
-if A != B:
-    print(-1)
-    exit()
+l = 0
+r = N-1
+
+count = 0
+while r>l:
+    if S[l] == S[r]:
+        l += 1
+        r -= 1
+    elif S[l] == 'x' and S[r] != 'x':
+        l += 1
+        count += 1
+    elif S[l] != 'x' and S[r] == 'x':
+        r -= 1
+        count += 1
+    else:
+        print(-1)
+        exit()
+        
+print(count)
+
+
+
+
+
     
-else:
-    C = ''.join(reversed(S))
-    dp = [[10*9]*(l+1) for _ in range(l+1)]
     
-    
-    for i in range(l+1):
-        dp[0][i] = i
-        dp[i][0] = i
-    
-    for j in range(1, l+1):
-        for k in range(1, l+1):
-            if S[j-1] == C[k-1]:
-                dp[j][k] = min(dp[j-1][k-1], dp[j][k])
-            else:
-                dp[j][k] = min(dp[j-1][k]+1, dp[j][k-1]+1, dp[j][k])
-            
-    print(dp[l][l]
-          )
