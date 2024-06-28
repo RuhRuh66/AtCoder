@@ -8,16 +8,18 @@ A.sort()
 B.sort()
 C.sort()
 
-from bisect import bisect_left
+from bisect import bisect_left, bisect_right
 
 ans = 0
 
+
 for i in range(N):
-    j = bisect_left(B, A[i]+1)
-    gt = N-j
-    if j+1 < N:
-        k = bisect_left(C, B[j+1])
-        gt2 = N-k
-        ans += gt*gt2
+    s = bisect_right(A, B[i]-1)
+    s_n = s
+    l = bisect_left(C, B[i]+1)
+    l_n = N-l
+    
+    ans += s_n * l_n
     
 print(ans)
+
