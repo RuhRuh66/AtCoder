@@ -1,44 +1,13 @@
 N = int(input())
 
-lista = []
-listxy = []
+A = []
+li = []
 
-for _ in range(N):
+
+for j in range(N):
     a = int(input())
-    xy = [list(map(int, input().split())) for _ in range(a)]
-    lista.append(a)
-    listxy.append(xy)
+    x = [list(map(int, input().split())) for _ in range(a)]
+    A.append(a)
+    li.append(x)
     
-
-ans = 0
-
-for i in range(1<<N):
-    flag = True
-    temp =  0
-    for j in range(N):
-       if i>>j & 1 == 1:
-            temp += 1
-            for x, y in listxy[j]:
-                if i>>(x-1) & 1 != y:
-                    flag = False
-    if flag:
-        ans = max(ans, temp)
-        
-print(ans)
-    
-                
-            
-
-
-  
-                   
-                    
-
-            
-            
-            
-            
-    
-    
-    
-    
+print(A, li)
