@@ -1,23 +1,15 @@
 N, K = map(int, input().split())
 
-from math import floor
+if K == 0:
+    print(N*N)
+    exit()
 
-q = floor((N-K)/(K+1))
 
 
 ans = 0
+for b in range(K+1, N+1):
+    n = N//b
+    m = N%b
+    ans += (b-K)* n + max(0, m-K+1)
 
-for k in range(K, N):
-    ans += N-k
-
-    if q < 1:
-        print(ans)
-        exit()
-    else:    
-        for i in range(1, q+1):
-            for j in range(k+1, N+1):
-                if i * j + k <= N:
-                    ans += 1
-                
-print(ans)
-    
+print(ans) 
