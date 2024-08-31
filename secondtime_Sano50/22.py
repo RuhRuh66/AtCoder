@@ -1,20 +1,13 @@
 N, K = map(int, input().split())
-P = list(map(int, input().split()))
+P = [0]+list(map(int, input().split()))
 
-ex_v = []
-
+ex_p = []
 for i in range(N):
-    ex =(1+P[i])*P[i]/(2*P[i])
-    ex_v.append(ex)
+    temp = (1+P[i])/2
+    ex_p.append(temp)
     
-    
-ans = 0
-temp = 0
-for i in range(K):
-    temp += ex_v[i]
+from itertools import accumulate
 
-for j in range(N-K+1):
-    temp = max(temp-ex_v[j]+ex_v[K+j], temp)
+P2 = accumulate(ex_p)
 
-
-print(temp)
+for j in range(N
