@@ -1,28 +1,68 @@
-def euclidean_dist_sqr(point1, point2):
-    return (point1[0]-point2[0])** 2 +  (point1[1]-point2[1])** 2
+import math
 
-def column_based_sort(array, column=0):
-    return sorted(array, key=lambda x:x[column])
+def distance(p1, p2):
+    return math.sqrt((p1[0]-p2[0])**2 + (p1[1]-p2[1])**2)
 
-    
-def bruit_force_closest_pair(points, points_counts, min_dis=float('inf')):
-    for i in range(points_counts-1):
-        for j in range(i+1 ,points_counts):
-            current_dist = euclidean_dist_sqr(points[i], points[j])
-            min_dis = min(min_dis, current_dist)
+def bruit(array):
+    ln_ar = len(array)
+    mi = float('inf')
+    for i in range(ln_ar):
+        for j in range(i+1, ln_ar):
+            mi = min(mi,distance(array[i], array[j]))
             
-def dis_between_closest_in_strip(points, points_counts, min_dis=float('inf')):
-    for i in range(min(6, points_counts-1), points_counts):
-        for j in range(max(0, i-6), i):
-            current_dist = euclidean_dist_sqr(points[i], points[j])
-            min_dis = min(min_dis, current_dist)
-            return min_dis
+    return mi
+
+def closest_points(ax, ay):
+    ln_ax = len(ax)
+    if ln_ax <= 3:
+        return bruit(ax)
+    
+    m = ln_ax //2
+    midpoint = ax[m]
+    
+    lx = ax[:m]
+    rx = ax[m:]
+    
+    ly = list()
+    ry = list()
+    
+    for p in ay:
+        if p[0] <= midpoint[0]:
+            ly.append(p)
+        else:
+            ry.append(p)
+            
+    d1 = closest_points(lx, ly)
+    d2 = closest_points(rx, ry)
+    
+    d = min(d1, d2)
+    
+    split = [point for point in ay if abs(point[0]-midpoint[0]) < d]
+    
+    return closest_points_in_split(split, d)
+
+    
+    
         
-def closest_pair_of_points_sqr(points_sorted_on_x, points_sorted_on_y, points_counts):
-    # base case
-    if points_counts <=3:
-        return bruit_force_closest_pair(points_sorted_on_x, points_counts)
-    # recursion
-    mid = points_counts // 2
+def closest_points_in_split(arr, d):
+    ln_arr = len(arr)
+    for i in range(ln_arr):
+        for j in range(i+1, min(i+7, ln_arr)):
+            if arr[j][1]-arr[i][1] < d:
+                d = min(d, distance(arr[i], arr[j]))
+                
+    return d
+                
+                
+def solve(array):
+    ax = sorted(array, key = lambda x: x[0])
+    ay = sorted(array, key=lambda x: x[1])
+    return closest_points(ax, ay)
     
+N = int(input())
+array =[]
+for i in range(N):
+    a, b = map(int, input().split())
+    array.append((a,b))
     
+print(solve(array))
