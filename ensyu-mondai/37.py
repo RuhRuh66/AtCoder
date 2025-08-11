@@ -1,3 +1,4 @@
+<<<<<<< HEAD
 pos = []
 for i in range(4):
     x, y = map(int, input().split())
@@ -45,3 +46,12 @@ if t4 == 0 and on_segment(pos[2], pos[3], pos[1]):
     ans = 'Yes'
     
 print(ans)
+=======
+import numpy as np
+
+a = np.array([0, 1, 0])
+b = np.array([1, 0, 0])
+
+c = np.cross(a, b)
+print(c)
+>>>>>>> 2d2d37e (37 from mac)
